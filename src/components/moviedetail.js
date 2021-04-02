@@ -39,7 +39,7 @@ class MovieDetail extends Component {
                     <Card.Body>
                         {this.props.selectedMovie.reviews.map((review, i) =>
                             <p key={i}>
-                                <b>{review.username}</b>&nbsp; {review.review}
+                                <b>{review.username}</b>&nbsp; {review.small_quote}
                                 &nbsp;  <BsStarFill /> {review.rating}
                             </p>
                         )}
