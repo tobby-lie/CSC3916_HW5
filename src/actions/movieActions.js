@@ -75,7 +75,7 @@ export function fetchMovies() {
     }
 }
 
-export function postReivew(review_data) {
+export function postReview(review_data) {
     const env = runtimeEnv();
     return dispatch => {
         return fetch(`${env.REACT_APP_API_URL}/reviews`, {
@@ -93,7 +93,8 @@ export function postReivew(review_data) {
             }
             return response.json()
         }).then((res) => {
-            console.log(res.json())
+            // console.log(res.json())
+            window.location.reload();
         }).catch((e) => console.log(e));
     }
 }
