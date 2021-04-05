@@ -31,6 +31,7 @@ export function setMovie(movie) {
 
 export function fetchMovie(movie_title) {
     const env = runtimeEnv();
+    console.log('fetch',movie_title)
     return dispatch => {
         return fetch(`${env.REACT_APP_API_URL}/movies/${movie_title}?reviews=true`, {
             method: 'GET',
@@ -46,7 +47,8 @@ export function fetchMovie(movie_title) {
             }
             return response.json()
         }).then((res) => {
-            dispatch(movieFetched(res.movie));
+            console.log('res', res)
+            dispatch(movieFetched(res.movie[0]));
         }).catch((e) => console.log(e));
     }
 }
@@ -68,8 +70,30 @@ export function fetchMovies() {
             }
             return response.json()
         }).then((res) => {
-            console.log(res.movie)
             dispatch(moviesFetched(res.movie));
+        }).catch((e) => console.log(e));
+    }
+}
+
+export function postReivew(review_data) {
+    const env = runtimeEnv();
+    return dispatch => {
+        return fetch(`${env.REACT_APP_API_URL}/reviews`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+            mode: 'cors',
+            body: JSON.stringify(review_data)
+        }).then((response) => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response.json()
+        }).then((res) => {
+            console.log(res.json())
         }).catch((e) => console.log(e));
     }
 }
