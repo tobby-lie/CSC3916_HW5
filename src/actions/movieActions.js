@@ -23,9 +23,22 @@ function movieSet(movie) {
     }
 }
 
+function moviesSet(movies) {
+    return {
+        type: actionTypes.SET_MOVIES,
+        selectedMovies: movies
+    }
+}
+
 export function setMovie(movie) {
     return dispatch => {
         dispatch(movieSet(movie));
+    }
+}
+
+export function setMovies(movies) {
+    return dispatch => {
+        dispatch(moviesSet(movies));
     }
 }
 
@@ -95,6 +108,29 @@ export function postReview(review_data) {
         }).then((res) => {
             // console.log(res.json())
             window.location.reload();
+        }).catch((e) => console.log(e));
+    }
+}
+
+export function searchMovie(search_term) {
+    const env = runtimeEnv();
+    return dispatch => {
+        return fetch(`${env.REACT_APP_API_URL}/search/${search_term}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+            mode: 'cors'
+        }).then((response) => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response.json()
+        }).then((res) => {
+            // dispatch(moviesFetched(res.movie));
+            console.log(res.movie);
         }).catch((e) => console.log(e));
     }
 }
