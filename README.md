@@ -1,3 +1,7 @@
+This project is hosted via Heroku at this [link](https://csc3916-hw5-lie.herokuapp.com). 
+
+This project collaborates with this [API](https://github.com/tobby-lie/CSC3916_HW04).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
